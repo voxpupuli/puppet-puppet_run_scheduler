@@ -22,7 +22,7 @@ class puppet_run_scheduler::windows {
     before    => Service['puppet'],
     trigger   => [{
       'schedule'         => 'daily',
-      'start_time'       => sprintf("%02d:%02d", $start_hour, $start_min),
+      'start_time'       => sprintf('%02d:%02d', $start_hour, $start_min),
       'minutes_interval' => $interval_mins,
     }],
   }
