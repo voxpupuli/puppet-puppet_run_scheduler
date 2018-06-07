@@ -8,7 +8,7 @@
 #   include puppet_run_scheduler
 class puppet_run_scheduler (
   Puppet_run_scheduler::Run_interval $run_interval = '30m',
-  String                             $start_time   = '00:00',
+  Pattern[/[0-2]\d:\d\d/]            $start_time   = '00:00',
   Boolean                            $splay        = true,
   Puppet_run_scheduler::Run_interval $splay_limit  = '30m',
 ) {

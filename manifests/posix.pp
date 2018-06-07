@@ -27,7 +27,7 @@ class puppet_run_scheduler::posix {
   cron { 'cron.puppet':
     command => "/opt/puppetlabs/bin/puppet agent -t > /dev/null",
     user    => "root",
-    hour    => $hours
+    hour    => $hours,
     minute  => $mins,
     before  => Service['puppet'],
   }
