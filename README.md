@@ -1,5 +1,5 @@
 
-# puppet_agent_scheduler
+# puppet_run_scheduler
 
 Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
 
@@ -14,10 +14,10 @@ The README template below provides a starting point with details about what info
 #### Table of Contents
 
 1. [Description](#description)
-2. [Setup - The basics of getting started with puppet_agent_scheduler](#setup)
-    * [What puppet_agent_scheduler affects](#what-puppet_agent_scheduler-affects)
+2. [Setup - The basics of getting started with puppet_run_scheduler](#setup)
+    * [What puppet_run_scheduler affects](#what-puppet_run_scheduler-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with puppet_agent_scheduler](#beginning-with-puppet_agent_scheduler)
+    * [Beginning with puppet_run_scheduler](#beginning-with-puppet_run_scheduler)
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -31,7 +31,7 @@ You can give more descriptive information in a second paragraph. This paragraph 
 
 ## Setup
 
-### What puppet_agent_scheduler affects **OPTIONAL**
+### What puppet_run_scheduler affects **OPTIONAL**
 
 If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
 
@@ -47,7 +47,7 @@ If your module requires anything extra before setting up (pluginsync enabled, an
 
 If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
 
-### Beginning with puppet_agent_scheduler
+### Beginning with puppet_run_scheduler
 
 The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
 
