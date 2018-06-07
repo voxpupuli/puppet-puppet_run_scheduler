@@ -7,6 +7,7 @@
 # @example
 #   include puppet_run_scheduler
 class puppet_run_scheduler (
+  Enum['present', 'absent']          $ensure       = 'present',
   Puppet_run_scheduler::Run_interval $run_interval = '30m',
   Pattern[/[0-2]\d:\d\d/]            $start_time   = '00:00',
   Boolean                            $splay        = true,
@@ -26,14 +27,23 @@ class puppet_run_scheduler (
   $start_hour = $first_start_epoch_mins / 60
   $start_min  = $first_start_epoch_mins % 60
 
+  $agent_flags = '--onetime --no-daemonize --splay --splaylimit=60s'
+
   case $facts[os][family] {
     'windows': { contain puppet_run_scheduler::windows }
     default:   { contain puppet_run_scheduler::posix   }
   }
 
-  service { 'puppet':
-    enable => false,
-    ensure => stopped,
+  if ($ensure == 'present') {
+    $service_enable = false
+    $service_ensure = stopped
+  } else {
+    $service_enable = true
+    $service_ensure = running
   }
 
+  service { 'puppet':
+    enable => $service_enable,
+    ensure => $service_ensure,
+  }
 }

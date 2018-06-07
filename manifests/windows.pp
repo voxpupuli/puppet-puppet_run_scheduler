@@ -13,10 +13,10 @@ class puppet_run_scheduler::windows {
   $start_hour    = $puppet_run_scheduler::start_hour
   $start_min     = $puppet_run_scheduler::start_min
 
-  scheduled_task { 'Puppet Agent Run':
-    ensure    => 'present',
+  scheduled_task { 'puppet-run-scheduler':
+    ensure    => $puppet_run_scheduler::ensure,
     command   => 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
-    arguments => 'agent -t',
+    arguments => "agent ${puppet_run_scheduler::agent_flags}",
     enabled   => 'true',
     user      => 'system',
     before    => Service['puppet'],

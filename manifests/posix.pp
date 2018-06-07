@@ -24,9 +24,10 @@ class puppet_run_scheduler::posix {
     $min = $epoch_mins % 60
   }.unique()
 
-  cron { 'cron.puppet':
-    command => "/opt/puppetlabs/bin/puppet agent -t > /dev/null",
-    user    => "root",
+  cron { 'puppet-run-scheduler':
+    ensure  => $puppet_run_scheduler::ensure,
+    command => "/opt/puppetlabs/bin/puppet agent ${puppet_run_scheduler::agent_flags} >/dev/null 2>&1",
+    user    => 'root',
     hour    => $hours,
     minute  => $mins,
     before  => Service['puppet'],
