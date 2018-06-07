@@ -9,13 +9,27 @@
 class puppet_run_scheduler::posix {
   assert_private()
 
-  #$puppet_run_scheduler::run_interval_minutes
-  #$puppet_run_scheduler::adj_start_mins_since_midnight
-  $start_hour = $puppet_run_scheduler::adj_start_hour
-  $start_min  = $puppet_run_scheduler::adj_start_min
+  $interval_mins = $puppet_run_scheduler::interval_mins
+  $runs_per_day  = $puppet_run_scheduler::runs_per_day
+  $start_hour    = $puppet_run_scheduler::start_hour
+  $start_min     = $puppet_run_scheduler::start_min
 
-  notify { 'start min': message => $start_min; }
-  notify { 'start hour': message => $start_hour; }
+  $hours = $runs_per_day.map |$n| {
+    $epoch_mins = ($start_hour * 60) + $start_min + ($n * $interval_mins)
+    $hour = $epoch_mins / 60
+  }.unique()
 
+  $mins = $runs_per_day.map |$n| {
+    $epoch_mins = $start_min + ($n * $interval_mins)
+    $min = $epoch_mins % 60
+  }.unique()
+
+  cron { 'cron.puppet':
+    command => "/opt/puppetlabs/bin/puppet agent -t > /dev/null",
+    user    => "root",
+    hour    => $hours
+    minute  => $mins,
+    before  => Service['puppet'],
+  }
 
 }
