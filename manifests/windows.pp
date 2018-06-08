@@ -6,7 +6,10 @@
 #
 # @example
 #   include puppet_run_scheduler::windows
-class puppet_run_scheduler::windows {
+class puppet_run_scheduler::windows (
+  String                            $scheduled_task_user     = 'system',
+  Variant[Undef, String, Sensitive] $scheduled_task_password = undef,
+) {
   assert_private()
 
   $interval_mins = $puppet_run_scheduler::interval_mins
@@ -18,7 +21,8 @@ class puppet_run_scheduler::windows {
     command   => 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
     arguments => "agent ${puppet_run_scheduler::agent_flags}",
     enabled   => true,
-    user      => 'system',
+    user      => $scheduled_task_user,
+    password  => $scheduled_task_password,
     before    => Service['puppet'],
     trigger   => [{
       'schedule'         => 'daily',

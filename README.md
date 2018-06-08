@@ -71,3 +71,19 @@ Same format as run\_interval. How long a period of time to spread runs out over.
 _Default: "00:00"_
 
 A specific time in the form of HH:MM that a Puppet run should start (subject to the splaylimit parameter). This is useful for organizations with long run intervals and specific maintenance windows. For example, given a run\_interval of 4h and a splaylimit of 30m, administrators can use start\_time to ensure that Puppet runs occur at the beginning of a known maintenance window.
+
+### Data Parameters
+
+Additional parameters exist in private classes which can be set using Hiera to further adjust behavior.
+
+#### `puppet_run_scheduler::windows::scheduled_task_user`
+
+_Default: "system"_
+
+The user to run the Puppet run scheduled task as.
+
+#### `puppet_run_scheduler::windows::scheduled_task_password`
+
+_Default: undef_
+
+The password for the user to run the Puppet run scheduled task as. Only used if specifying a user other than "system".
