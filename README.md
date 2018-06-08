@@ -46,6 +46,8 @@ class { 'puppet_run_scheduler':
 
 ### Parameters
 
+Parameters on the puppet\_run\_scheduler class can be set when the class is declared resource-style, or else specified in Hiera.
+
 #### ensure
 
 _Default: present_
@@ -74,7 +76,7 @@ A specific time in the form of HH:MM that a Puppet run should start (subject to 
 
 ### Data Parameters
 
-Additional parameters exist in private classes which can be set using Hiera to further adjust behavior.
+Parameters in private classes which can be set using Hiera to further adjust behavior. Because private classes cannot be declared resource-style, the only way to use these parameters is to set them in Hiera.
 
 #### `puppet_run_scheduler::windows::scheduled_task_user`
 
