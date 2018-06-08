@@ -7,7 +7,6 @@ Configure and distribute Puppet run frequency using Cron (Posix) and Scheduled T
 1. [Description](#description)
 2. [Setup - The basics of getting started with puppet\_run\_scheduler](#setup)
     * [What puppet\_run\_scheduler affects](#what-puppet_run_scheduler-affects)
-    * [Beginning with puppet\_run\_scheduler](#beginning-with-puppet_run_scheduler)
 3. [Usage - Configuration options and additional functionality](#usage)
 
 ## Description
@@ -72,7 +71,7 @@ Same format as run\_interval. How long a period of time to spread runs out over.
 
 _Default: "00:00"_
 
-A specific time in the form of HH:MM that a Puppet run should start (subject to the splaylimit parameter). This is useful for organizations with long run intervals and specific maintenance windows. For example, given a run\_interval of 4h and a splaylimit of 30m, administrators can use start\_time to ensure that Puppet runs occur at the beginning of a known maintenance window.
+A specific time in the form of HH:MM that a Puppet run should start (subject to the splaylimit parameter). This is useful for organizations with long run intervals and specific maintenance windows. For example, given a run\_interval of 4h and a splaylimit of 30m, administrators can use start\_time to ensure that Puppet runs occur during the first 30 minutes of a known maintenance window.
 
 ### Data Parameters
 
