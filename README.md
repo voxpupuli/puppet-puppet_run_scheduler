@@ -88,3 +88,9 @@ The user to run the Puppet run scheduled task as.
 _Default: undef_
 
 The password for the user to run the Puppet run scheduled task as. Only used if specifying a user other than "system".
+
+## Known Issues
+
+On Windows, when running from a Scheduled Task, Puppet creates cache files that are not readable by "Everyone", only SYSTEM. This has the effect of making manual `puppet agent -t` runs return a lot of red text in the shell. The last line of red text even suggests that Puppet was unable to submit a report. This isn't true though; Puppet DOES submit a report.
+
+A fix will need to discover why the cache files are created with the permissions that they are, and implement some change to ensure the files are readable by at least the local administrators group.
