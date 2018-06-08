@@ -38,7 +38,7 @@ Parameters exist that can be used to fine-tune exactly how the runs are schedule
 ```puppet
 class { 'puppet_run_scheduler':
   run_interval => '4h',
-  splay_limit  => '1h',
+  splaylimit   => '1h',
   start_time   => '16:00',
 }
 ```
