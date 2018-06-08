@@ -42,7 +42,7 @@ class puppet_run_scheduler (
   }
 
   service { 'puppet':
-    enable => $service_enable,
     ensure => $service_ensure,
+    enable => $service_enable,
   }
 }

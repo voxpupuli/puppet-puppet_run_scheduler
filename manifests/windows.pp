@@ -17,7 +17,7 @@ class puppet_run_scheduler::windows {
     ensure    => $puppet_run_scheduler::ensure,
     command   => 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
     arguments => "agent ${puppet_run_scheduler::agent_flags}",
-    enabled   => 'true',
+    enabled   => true,
     user      => 'system',
     before    => Service['puppet'],
     trigger   => [{
