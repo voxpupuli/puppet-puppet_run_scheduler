@@ -16,12 +16,12 @@ class puppet_run_scheduler::posix {
 
   $hours = $runs_per_day.map |$n| {
     $epoch_mins = ($start_hour * 60) + $start_min + ($n * $interval_mins)
-    $hour = $epoch_mins / 60
+    $epoch_mins / 60
   }.unique()
 
   $mins = $runs_per_day.map |$n| {
     $epoch_mins = $start_min + ($n * $interval_mins)
-    $min = $epoch_mins % 60
+    $epoch_mins % 60
   }.unique()
 
   cron { 'puppet-run-scheduler':
