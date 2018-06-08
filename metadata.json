@@ -2,9 +2,11 @@
   "name": "reidmv-puppet_run_scheduler",
   "version": "0.1.0",
   "author": "Reid Vandewiele",
-  "summary": "",
+  "summary": "Configure and distribute Puppet run frequency using Cron (Posix) and Scheduled Tasks (Windows)",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/reidmv/reidmv-puppet_run_scheduler.git",
+  "project_page": "https://github.com/reidmv/reidmv-puppet_run_scheduler",
+  "issues_url": "https://github.com/reidmv/reidmv-puppet_run_scheduler/issues",
   "dependencies": [
 
   ],

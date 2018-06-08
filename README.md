@@ -18,15 +18,15 @@ The puppet\_run\_scheduler module replaces the running service method of schedul
 
 ## Setup
 
-### What puppet\_run\_scheduler affects **OPTIONAL**
+### What puppet\_run\_scheduler affects
 
-The `puppet` service will be disabled when puppet\_run\_scheduler is implemented on all platforms.
+The puppet service will be disabled when puppet\_run\_scheduler is implemented on all platforms.
 
 On Windows, puppet\_run\_scheduler will install a Scheduled Task called "puppet-run-scheduler".
 
 On Linux/Unix, puppet\_run\_scheduler will install a puppet-run-scheduler cron job under the root user.
 
-### Beginning with puppet\_run\_scheduler
+## Usage
 
 Using a default 30m run interval, you can simply include the class.
 
@@ -44,24 +44,30 @@ class { 'puppet_run_scheduler':
 }
 ```
 
-## Usage
-
-See above for basic usage.
-
 ### Parameters
 
 #### ensure
+
+_Default: present_
 
 Supports "present" or "absent". Note that "present" is the default, and "absent" only exists to provide clean-up or rollback options in case the class is applied somewhere it shouldn't have been.
 
 #### run\_interval
 
-What frequency Puppet should run at. There are an enumerated list of acceptable values ranging from 15m to 24h.
+_Default: "30m"_
+
+What frequency Puppet should run at. This value cannot be any period; there is an enumerated list of acceptable values.
+
+Valid values: 15m, 30m, 1h, 2h, 3h, 4h, 6h, 8h, 12h, 24h
 
 #### splaylimit
+
+_Default: $run\_interval_
 
 Same format as run\_interval. How long a period of time to spread runs out over. By default runs will be fully spread out over the entire run\_interval, but it is possible to have a shorter splaylimit.
 
 #### start\_time
+
+_Default: "00:00"_
 
 A specific time in the form of HH:MM that a Puppet run should start (subject to the splaylimit parameter). This is useful for organizations with long run intervals and specific maintenance windows. For example, given a run\_interval of 4h and a splaylimit of 30m, administrators can use start\_time to ensure that Puppet runs occur at the beginning of a known maintenance window.
