@@ -10,7 +10,7 @@ class puppet_run_scheduler (
   Enum['present', 'absent']          $ensure       = 'present',
   Puppet_run_scheduler::Run_interval $run_interval = '30m',
   Pattern[/[0-2]\d:\d\d/]            $start_time   = '00:00',
-  Puppet_run_scheduler::Run_interval $splaylimit   = '30m',
+  Puppet_run_scheduler::Run_interval $splaylimit   = $run_interval,
 ) {
   $interval_mins = puppet_run_scheduler::minutes($run_interval)
   $splaylimit_mins = puppet_run_scheduler::minutes($splaylimit)
