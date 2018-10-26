@@ -77,6 +77,18 @@ A specific time in the form of HH:MM that a Puppet run should start (subject to 
 
 Parameters in private classes which can be set using Hiera to further adjust behavior. Because private classes cannot be declared resource-style, the only way to use these parameters is to set them in Hiera.
 
+#### `puppet_run_scheduler::posix::puppet_executable`
+
+_Default: "/opt/puppetlabs/bin/puppet"_
+
+The fully qualified path to the Puppet executable to run on Posix systems. All of the Puppet command-line arguments appropriate for perfoming a one-time run will be passed to this executable.
+
+#### `puppet_run_scheduler::windows::puppet_executable`
+
+_Default: "C:\Program Files\Puppet Labs\Puppet\bin\puppet.bat"_
+
+The fully qualified path to the Puppet executable to run on Windows systems. All of the Puppet command-line arguments appropriate for perfoming a one-time run will be passed to this executable.
+
 #### `puppet_run_scheduler::windows::scheduled_task_user`
 
 _Default: "system"_
