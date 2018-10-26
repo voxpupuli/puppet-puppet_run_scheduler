@@ -7,7 +7,7 @@
 # @example
 #   include puppet_run_scheduler::posix
 class puppet_run_scheduler::posix (
-  Stdlib::Absolutepath $puppet_executable = '/opt/puppetlabs/bin/puppet',
+  String[1] $puppet_executable = '/opt/puppetlabs/bin/puppet',
 ) {
   assert_private()
 

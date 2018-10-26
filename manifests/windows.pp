@@ -9,7 +9,7 @@
 class puppet_run_scheduler::windows (
   String                            $scheduled_task_user     = 'system',
   Variant[Undef, String, Sensitive] $scheduled_task_password = undef,
-  Stdlib::Absolutepath              $puppet_executable       = 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
+  String[1]                         $puppet_executable       = 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
 ) {
   assert_private()
 
