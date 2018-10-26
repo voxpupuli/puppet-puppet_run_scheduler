@@ -1,6 +1,6 @@
 {
   "name": "reidmv-puppet_run_scheduler",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Reid Vandewiele",
   "summary": "Configure and distribute Puppet run frequency using Cron (Posix) and Scheduled Tasks (Windows)",
   "license": "Apache-2.0",
@@ -80,7 +80,7 @@
       "version_requirement": ">= 4.7.0 < 6.0.0"
     }
   ],
-  "pdk-version": "1.4.1",
+  "pdk-version": "1.7.1",
   "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
-  "template-ref": "1.4.1-0-g52adbbb"
+  "template-ref": "1.7.1-0-g810b982"
 }
