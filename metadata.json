@@ -8,7 +8,7 @@
   "project_page": "https://github.com/reidmv/reidmv-puppet_run_scheduler",
   "issues_url": "https://github.com/reidmv/reidmv-puppet_run_scheduler/issues",
   "dependencies": [
-
+    { "name":"puppetlabs/stdlib","version_requirement":">= 4.20.0 < 6.0.0" }
   ],
   "operatingsystem_support": [
     {
