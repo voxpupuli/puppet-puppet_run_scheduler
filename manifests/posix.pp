@@ -6,7 +6,9 @@
 #
 # @example
 #   include puppet_run_scheduler::posix
-class puppet_run_scheduler::posix {
+class puppet_run_scheduler::posix (
+  Stdlib::Absolutepath $puppet_executable = '/opt/puppetlabs/bin/puppet',
+) {
   assert_private()
 
   $interval_mins = $puppet_run_scheduler::interval_mins
@@ -26,7 +28,7 @@ class puppet_run_scheduler::posix {
 
   cron { 'puppet-run-scheduler':
     ensure  => $puppet_run_scheduler::ensure,
-    command => "/opt/puppetlabs/bin/puppet agent ${puppet_run_scheduler::agent_flags} >/dev/null 2>&1",
+    command => "${puppet_executable} agent ${puppet_run_scheduler::agent_flags} >/dev/null 2>&1",
     user    => 'root',
     hour    => $hours,
     minute  => $mins,

@@ -9,6 +9,7 @@
 class puppet_run_scheduler::windows (
   String                            $scheduled_task_user     = 'system',
   Variant[Undef, String, Sensitive] $scheduled_task_password = undef,
+  Stdlib::Absolutepath              $puppet_executable       = 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
 ) {
   assert_private()
 
@@ -18,7 +19,7 @@ class puppet_run_scheduler::windows (
 
   scheduled_task { 'puppet-run-scheduler':
     ensure    => $puppet_run_scheduler::ensure,
-    command   => 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
+    command   => $puppet_executable,
     arguments => "agent ${puppet_run_scheduler::agent_flags}",
     enabled   => true,
     user      => $scheduled_task_user,
