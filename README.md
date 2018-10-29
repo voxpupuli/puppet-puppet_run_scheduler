@@ -101,8 +101,16 @@ _Default: undef_
 
 The password for the user to run the Puppet run scheduled task as. Only used if specifying a user other than "system".
 
+#### `puppet_run_scheduler::windows::manage_lastrun_acls`
+
+_Default: true_
+
+Whether or not to manage acl entries on Puppet lastrun files, to work around [PUP-9238](https://tickets.puppetlabs.com/browse/PUP-9238).
+
 ## Known Issues
+
+See https://tickets.puppetlabs.com/browse/PUP-9238.
 
 On Windows, when running from a Scheduled Task, Puppet creates cache files that are not readable by "Everyone", only SYSTEM. This has the effect of making manual `puppet agent -t` runs return a lot of red text in the shell. The last line of red text even suggests that Puppet was unable to submit a report. This isn't true though; Puppet DOES submit a report.
 
-A fix will need to discover why the cache files are created with the permissions that they are, and implement some change to ensure the files are readable by at least the local administrators group.
+A workaround exists in the module to avoid this by explicitly ensuring minimal ACEs exist on those files.
