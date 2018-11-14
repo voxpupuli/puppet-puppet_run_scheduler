@@ -53,9 +53,10 @@ class puppet_run_scheduler::windows (
       }
 
       acl { $title:
-        target      => $path,
-        purge       => false,
-        permissions => [
+        target                     => $path,
+        purge                      => false,
+        inherit_parent_permissions => false,
+        permissions                => [
           {'identity' => 'BUILTIN\Administrators', 'rights' => ['full']},
           {'identity' => 'NT AUTHORITY\SYSTEM', 'rights' => ['full']},
         ],
