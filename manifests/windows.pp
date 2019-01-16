@@ -18,15 +18,21 @@ class puppet_run_scheduler::windows (
   $start_hour    = $puppet_run_scheduler::start_hour
   $start_min     = $puppet_run_scheduler::start_min
 
+  $split_exe = $puppet_executable.split(/[\/\\]/)
+  $basename  = $split_exe[-1]
+  $dirname   = $split_exe[0,-2].join('\\')
+
   scheduled_task { 'puppet-run-scheduler':
-    ensure    => $puppet_run_scheduler::ensure,
-    command   => $puppet_executable,
-    arguments => "agent ${puppet_run_scheduler::agent_flags}",
-    enabled   => true,
-    user      => $scheduled_task_user,
-    password  => $scheduled_task_password,
-    before    => Service['puppet'],
-    trigger   => [{
+    ensure        => $puppet_run_scheduler::ensure,
+    command       => $basename,
+    working_dir   => $dirname,
+    arguments     => "agent ${puppet_run_scheduler::agent_flags}",
+    enabled       => true,
+    user          => $scheduled_task_user,
+    password      => $scheduled_task_password,
+    before        => Service['puppet'],
+    compatibility => 2,
+    trigger              => [{
       'schedule'         => 'daily',
       'start_time'       => sprintf('%02d:%02d', $start_hour, $start_min),
       'minutes_interval' => $interval_mins,
