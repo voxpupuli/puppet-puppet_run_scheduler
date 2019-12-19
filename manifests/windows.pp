@@ -22,6 +22,18 @@ class puppet_run_scheduler::windows (
   $basename  = $split_exe[-1]
   $dirname   = $split_exe[0,-2].join('\\')
 
+  # If mins is 1440 (24h), then we need to NOT set minutes_interval in the
+  # trigger. Daily schedule, no minutes_interval option = run once a day.
+  # Otherwise, for more frequently than once daily, we set minutes_interval to
+  # a value.
+  $trigger = [{
+    'schedule'         => 'daily',
+    'start_time'       => sprintf('%02d:%02d', $start_hour, $start_min),
+  } + ($interval_mins ? {
+    1440    => { },
+    default => { 'minutes_interval' => $interval_mins },
+  })]
+
   scheduled_task { 'puppet-run-scheduler':
     ensure        => $puppet_run_scheduler::ensure,
     command       => $basename,
@@ -32,11 +44,7 @@ class puppet_run_scheduler::windows (
     password      => $scheduled_task_password,
     before        => Service['puppet'],
     compatibility => 2,
-    trigger              => [{
-      'schedule'         => 'daily',
-      'start_time'       => sprintf('%02d:%02d', $start_hour, $start_min),
-      'minutes_interval' => $interval_mins,
-    }],
+    trigger       => $trigger,
   }
 
   # https://tickets.puppetlabs.com/browse/PUP-9238
