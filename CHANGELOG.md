@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.4.2
+
+Update module dependency metadata to indicate that the newest versions of required modules puppetlabs-acl and puppetlabs-scheduled\_task are compatible.
+
 ## Release 0.4.1
 
 **Bug fixes**
