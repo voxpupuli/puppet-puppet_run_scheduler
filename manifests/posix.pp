@@ -1,13 +1,12 @@
 # puppet_run_scheduler::posix
 #
-# A description of what this class does
+# @param [Stdlib::Absolutepath] puppet_executable
+#   The fully qualified path to the Puppet executable to run on Posix systems.
+#   All of the Puppet command-line arguments appropriate for perfoming a
+#   one-time run will be passed to this executable.
 #
-# @summary A short summary of the purpose of this class
-#
-# @example
-#   include puppet_run_scheduler::posix
 class puppet_run_scheduler::posix (
-  String[1] $puppet_executable = $puppet_run_scheduler::posix_puppet_executable,
+  Stdlib::Absolutepath $puppet_executable = $puppet_run_scheduler::posix_puppet_executable,
 ) {
   assert_private()
 
@@ -34,5 +33,4 @@ class puppet_run_scheduler::posix (
     minute  => $mins,
     before  => Service['puppet'],
   }
-
 }

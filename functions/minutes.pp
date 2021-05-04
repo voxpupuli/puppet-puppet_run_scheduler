@@ -8,5 +8,4 @@ function puppet_run_scheduler::minutes (
     /h$/: { $number * 60 }
     default: { fail('invalid input') }
   }
-
 }
