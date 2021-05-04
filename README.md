@@ -29,6 +29,24 @@ On Windows, puppet\_run\_scheduler will install a Scheduled Task called "puppet-
 
 On Linux/Unix, puppet\_run\_scheduler will install a puppet-run-scheduler cron job under the root user.
 
+## Basic Usage
+
+Using a default 30m run interval, you can simply include the class.
+
+```puppet
+include puppet_run_scheduler
+```
+
+Parameters exist that can be used to fine-tune exactly how the runs are scheduled.
+
+```puppet
+class { 'puppet_run_scheduler':
+  run_interval => '4h',
+  splaylimit   => '1h',
+  start_time   => '16:00',
+}
+```
+
 ## Reference
 
 This module is documented via `pdk bundle exec puppet strings generate --format markdown`. Please see [REFERENCE.md](REFERENCE.md) for more info.
