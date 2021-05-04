@@ -37,7 +37,7 @@ class puppet_run_scheduler::windows (
 
   scheduled_task { 'puppet-run-scheduler':
     ensure        => $puppet_run_scheduler::ensure,
-    command       => $basename,
+    command       => $puppet_executable, # TODO: change this to $basename when scheduled_task supports it
     working_dir   => $dirname,
     arguments     => "agent ${puppet_run_scheduler::agent_flags}",
     enabled       => true,
