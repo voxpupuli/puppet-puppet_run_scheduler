@@ -7,10 +7,9 @@
 # @example
 #   include puppet_run_scheduler::posix
 class puppet_run_scheduler::posix (
-  String[1] $puppet_executable = '/opt/puppetlabs/bin/puppet',
+  String[1] $puppet_executable = $puppet_run_scheduler::posix_puppet_executable,
 ) {
   assert_private()
-  include(puppet_run_scheduler)
 
   $interval_mins = $puppet_run_scheduler::interval_mins
   $runs_per_day  = $puppet_run_scheduler::runs_per_day

@@ -3,7 +3,8 @@ require 'spec_helper'
 describe 'puppet_run_scheduler::posix' do
   let(:pre_condition) do
     # This mocks the assert_private() function so that private classes may be tested
-    'function assert_private() { }'
+    'include puppet_run_scheduler
+    function assert_private() { }'
   end
 
   test_on = {supported_os: [{'operatingsystem' => 'CentOS'},

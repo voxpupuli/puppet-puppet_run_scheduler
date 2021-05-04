@@ -7,10 +7,12 @@
 # @example
 #   include puppet_run_scheduler
 class puppet_run_scheduler (
-  Enum['present', 'absent']          $ensure       = 'present',
-  Puppet_run_scheduler::Run_interval $run_interval = '30m',
-  Pattern[/[0-2]\d:\d\d/]            $start_time   = '00:00',
-  Puppet_run_scheduler::Run_interval $splaylimit   = $run_interval,
+  Enum['present', 'absent']          $ensure                    = 'present',
+  Puppet_run_scheduler::Run_interval $run_interval              = '30m',
+  Pattern[/[0-2]\d:\d\d/]            $start_time                = '00:00',
+  Puppet_run_scheduler::Run_interval $splaylimit                = $run_interval,
+  String[1]                          $posix_puppet_executable   = '/opt/puppetlabs/bin/puppet',
+  String[1]                          $windows_puppet_executable = 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
 ) {
   $interval_mins = puppet_run_scheduler::minutes($run_interval)
   $splaylimit_mins = puppet_run_scheduler::minutes($splaylimit)
