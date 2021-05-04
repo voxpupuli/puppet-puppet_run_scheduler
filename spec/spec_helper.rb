@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+RSpec.configure do |c|
+  c.mock_with :rspec
+end
+
 require 'puppetlabs_spec_helper/module_spec_helper'
 require 'rspec-puppet-facts'
 
@@ -34,7 +38,7 @@ end
 
 RSpec.configure do |c|
   c.default_facts = default_facts
-  c.hiera_config = File.join(File.dirname(__FILE__), 'fixtures', 'hiera.yaml')
+  c.hiera_config = 'File.join(File.dirname(__FILE__), "fixtures", "hiera.yaml")'
   c.before :each do
     # set to strictest setting for testing
     # by default Puppet runs at warning level
@@ -43,6 +47,7 @@ RSpec.configure do |c|
   end
   c.filter_run_excluding(bolt: true) unless ENV['GEM_BOLT']
   c.after(:suite) do
+    RSpec::Puppet::Coverage.report!(0)
   end
 end
 

@@ -1,13 +1,17 @@
 # puppet\_run\_scheduler
 
+![](https://img.shields.io/puppetforge/pdk-version/reidmv/puppet_run_scheduler.svg?style=popout)
+![](https://img.shields.io/puppetforge/v/reidmv/puppet_run_scheduler.svg?style=popout)
+![](https://img.shields.io/puppetforge/dt/reidmv/puppet_run_scheduler.svg?style=popout)
+[![Build Status](https://github.com/reidmv/reidmv-puppet_run_scheduler/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/reidmv/reidmv-puppet_run_scheduler/actions/workflows/ci.yml)
+
 Configure and distribute Puppet run frequency using Cron (Posix) and Scheduled Tasks (Windows).
 
-#### Table of Contents
-
-1. [Description](#description)
-2. [Setup - The basics of getting started with puppet\_run\_scheduler](#setup)
-    * [What puppet\_run\_scheduler affects](#what-puppet_run_scheduler-affects)
-3. [Usage - Configuration options and additional functionality](#usage)
+- [Description](#description)
+- [Setup](#setup)
+  - [What puppet\_run\_scheduler affects](#what-puppet_run_scheduler-affects)
+- [Reference](#reference)
+- [Known Issues](#known-issues)
 
 ## Description
 
@@ -25,7 +29,7 @@ On Windows, puppet\_run\_scheduler will install a Scheduled Task called "puppet-
 
 On Linux/Unix, puppet\_run\_scheduler will install a puppet-run-scheduler cron job under the root user.
 
-## Usage
+## Basic Usage
 
 Using a default 30m run interval, you can simply include the class.
 
@@ -43,69 +47,10 @@ class { 'puppet_run_scheduler':
 }
 ```
 
-### Parameters
+## Reference
 
-Parameters on the puppet\_run\_scheduler class can be set when the class is declared resource-style, or else specified in Hiera.
+This module is documented via `pdk bundle exec puppet strings generate --format markdown`. Please see [REFERENCE.md](REFERENCE.md) for more info.
 
-#### ensure
-
-_Default: present_
-
-Supports "present" or "absent". Note that "present" is the default, and "absent" only exists to provide clean-up or rollback options in case the class is applied somewhere it shouldn't have been.
-
-#### run\_interval
-
-_Default: "30m"_
-
-What frequency Puppet should run at. This value cannot be any period; there is an enumerated list of acceptable values.
-
-Valid values: 15m, 30m, 1h, 2h, 3h, 4h, 6h, 8h, 12h, 24h
-
-#### splaylimit
-
-_Default: $run\_interval_
-
-Same format as run\_interval. How long a period of time to spread runs out over. By default runs will be fully spread out over the entire run\_interval, but it is possible to have a shorter splaylimit.
-
-#### start\_time
-
-_Default: "00:00"_
-
-A specific time in the form of HH:MM that a Puppet run should start (subject to the splaylimit parameter). This is useful for organizations with long run intervals and specific maintenance windows. For example, given a run\_interval of 4h and a splaylimit of 30m, administrators can use start\_time to ensure that Puppet runs occur during the first 30 minutes of a known maintenance window.
-
-### Data Parameters
-
-Parameters in private classes which can be set using Hiera to further adjust behavior. Because private classes cannot be declared resource-style, the only way to use these parameters is to set them in Hiera.
-
-#### `puppet_run_scheduler::posix::puppet_executable`
-
-_Default: "/opt/puppetlabs/bin/puppet"_
-
-The fully qualified path to the Puppet executable to run on Posix systems. All of the Puppet command-line arguments appropriate for perfoming a one-time run will be passed to this executable.
-
-#### `puppet_run_scheduler::windows::puppet_executable`
-
-_Default: "C:\Program Files\Puppet Labs\Puppet\bin\puppet.bat"_
-
-The fully qualified path to the Puppet executable to run on Windows systems. All of the Puppet command-line arguments appropriate for perfoming a one-time run will be passed to this executable.
-
-#### `puppet_run_scheduler::windows::scheduled_task_user`
-
-_Default: "system"_
-
-The user to run the Puppet run scheduled task as.
-
-#### `puppet_run_scheduler::windows::scheduled_task_password`
-
-_Default: undef_
-
-The password for the user to run the Puppet run scheduled task as. Only used if specifying a user other than "system".
-
-#### `puppet_run_scheduler::windows::manage_lastrun_acls`
-
-_Default: true_
-
-Whether or not to manage acl entries on Puppet lastrun files, to work around [PUP-9238](https://tickets.puppetlabs.com/browse/PUP-9238).
 
 ## Known Issues
 

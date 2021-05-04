@@ -1,16 +1,26 @@
 # puppet_run_scheduler::windows
 #
-# A description of what this class does
+# @param [String[1]] scheduled_task_user
+#   The user to run the Puppet run scheduled task as.
 #
-# @summary A short summary of the purpose of this class
+# @param [Stdlib::Absolutepath] puppet_executable
+#   The fully qualified path to the Puppet executable to run on Windows
+#   systems. All of the Puppet command-line arguments appropriate for perfoming
+#   a one-time run will be passed to this executable.
 #
-# @example
-#   include puppet_run_scheduler::windows
+# @param [Boolean] manage_lastrun_acls
+#   Whether or not to manage acl entries on Puppet lastrun files, to work
+#   around [PUP-9238](https://tickets.puppetlabs.com/browse/PUP-9238).
+#
+# @param [Optional[Variant[String[1], Sensitive[String[1]]]]] scheduled_task_password
+#   The password for the user to run the Puppet run scheduled task as. Only
+#   used if specifying a user other than "system" via `scheduled_task_user`.
+#
 class puppet_run_scheduler::windows (
-  String                            $scheduled_task_user     = 'system',
-  Variant[Undef, String, Sensitive] $scheduled_task_password = undef,
-  String[1]                         $puppet_executable       = $puppet_run_scheduler::windows_puppet_executable,
-  Boolean                           $manage_lastrun_acls     = true,
+  String[1]                                          $scheduled_task_user     = 'system',
+  Stdlib::Absolutepath                               $puppet_executable       = $puppet_run_scheduler::windows_puppet_executable,
+  Boolean                                            $manage_lastrun_acls     = true,
+  Optional[Variant[String[1], Sensitive[String[1]]]] $scheduled_task_password = undef,
 ) {
   assert_private()
 
@@ -27,11 +37,11 @@ class puppet_run_scheduler::windows (
   # Otherwise, for more frequently than once daily, we set minutes_interval to
   # a value.
   $trigger = [{
-    'schedule'         => 'daily',
-    'start_time'       => sprintf('%02d:%02d', $start_hour, $start_min),
-  } + ($interval_mins ? {
-    1440    => { },
-    default => { 'minutes_interval' => $interval_mins },
+      'schedule'         => 'daily',
+      'start_time'       => sprintf('%02d:%02d', $start_hour, $start_min),
+    } + ($interval_mins ? {
+        1440    => {},
+        default => { 'minutes_interval' => $interval_mins },
   })]
 
   scheduled_task { 'puppet-run-scheduler':
@@ -71,11 +81,10 @@ class puppet_run_scheduler::windows (
         purge                      => false,
         inherit_parent_permissions => false,
         permissions                => [
-          {'identity' => 'BUILTIN\Administrators', 'rights' => ['full']},
-          {'identity' => 'NT AUTHORITY\SYSTEM', 'rights' => ['full']},
+          { 'identity' => 'BUILTIN\Administrators', 'rights' => ['full'] },
+          { 'identity' => 'NT AUTHORITY\SYSTEM', 'rights' => ['full'] },
         ],
       }
     }
   }
-
 }
