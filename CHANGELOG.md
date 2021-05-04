@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 1.0.0
+
+**Features**
+
+* Add puppet\_executable parameters to puppet\_run\_scheduler class, for easier inclusion and use in profiles.
+
+**Improvements**
+
+* Ensure basic unit tests run to completion
+
+**Bug fixes**
+
+* Use an absolute path for `command` in the scheduled\_task resource on Windows. This is necessary to pass the type parameter validation checks.
+
 ## Release 0.4.2
 
 Update module dependency metadata to indicate that the newest versions of required modules puppetlabs-acl and puppetlabs-scheduled\_task are compatible.
