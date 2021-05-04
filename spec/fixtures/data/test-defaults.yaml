@@ -1,0 +1,6 @@
+---
+# The acl module tries to validate acls using OS-specific provider code.
+# This is inappropriate for testing and causes problems. For now, do not
+# test this element of the module.
+puppet_run_scheduler::windows::manage_lastrun_acls: false
+

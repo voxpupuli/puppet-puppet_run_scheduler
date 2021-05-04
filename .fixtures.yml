@@ -4,3 +4,7 @@
 fixtures:
   forge_modules:
 #     stdlib: "puppetlabs/stdlib"
+fixtures:
+   forge_modules:
+     acl: "puppetlabs/acl"
+     scheduled_task: "puppetlabs/scheduled_task"

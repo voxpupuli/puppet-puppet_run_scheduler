@@ -1,7 +1,22 @@
 require 'spec_helper'
 
 describe 'puppet_run_scheduler::posix' do
-  on_supported_os.each do |os, os_facts|
+  let(:pre_condition) do
+    # This mocks the assert_private() function so that private classes may be tested
+    'function assert_private() { }'
+  end
+
+  test_on = {supported_os: [{'operatingsystem' => 'CentOS'},
+                            {'operatingsystem' => 'OracleLinux'},
+                            {'operatingsystem' => 'RedHat'},
+                            {'operatingsystem' => 'Scientific'},
+                            {'operatingsystem' => 'Debian'},
+                            {'operatingsystem' => 'Ubuntu'},
+                            {'operatingsystem' => 'Fedora'},
+                            {'operatingsystem' => 'SLES'},
+                            {'operatingsystem' => 'Solaris'}]}
+
+  on_supported_os(test_on).each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
 

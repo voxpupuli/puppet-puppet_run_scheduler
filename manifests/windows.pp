@@ -13,6 +13,7 @@ class puppet_run_scheduler::windows (
   Boolean                           $manage_lastrun_acls     = true,
 ) {
   assert_private()
+  include(puppet_run_scheduler)
 
   $interval_mins = $puppet_run_scheduler::interval_mins
   $start_hour    = $puppet_run_scheduler::start_hour
