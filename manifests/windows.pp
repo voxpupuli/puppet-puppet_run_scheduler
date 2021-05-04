@@ -9,11 +9,10 @@
 class puppet_run_scheduler::windows (
   String                            $scheduled_task_user     = 'system',
   Variant[Undef, String, Sensitive] $scheduled_task_password = undef,
-  String[1]                         $puppet_executable       = 'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat',
+  String[1]                         $puppet_executable       = $puppet_run_scheduler::windows_puppet_executable,
   Boolean                           $manage_lastrun_acls     = true,
 ) {
   assert_private()
-  include(puppet_run_scheduler)
 
   $interval_mins = $puppet_run_scheduler::interval_mins
   $start_hour    = $puppet_run_scheduler::start_hour
