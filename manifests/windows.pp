@@ -1,5 +1,7 @@
 # puppet_run_scheduler::windows
 #
+# @summary Private implementation class for Windows OS
+#
 # @param [String[1]] scheduled_task_user
 #   The user to run the Puppet run scheduled task as.
 #

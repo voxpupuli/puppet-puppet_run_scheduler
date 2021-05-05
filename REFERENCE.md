@@ -6,9 +6,9 @@
 
 ### Classes
 
-* [`puppet_run_scheduler`](#puppet_run_scheduler): A short summary of the purpose of this class
-* [`puppet_run_scheduler::posix`](#puppet_run_schedulerposix): puppet_run_scheduler::posix
-* [`puppet_run_scheduler::windows`](#puppet_run_schedulerwindows): puppet_run_scheduler::windows
+* [`puppet_run_scheduler`](#puppet_run_scheduler): Configure and distribute Puppet run frequency using Cron (Posix) and Scheduled Tasks (Windows).
+* [`puppet_run_scheduler::posix`](#puppet_run_schedulerposix): Private implementation class for posix OSes
+* [`puppet_run_scheduler::windows`](#puppet_run_schedulerwindows): Private implementation class for Windows OS
 
 ### Functions
 
@@ -16,15 +16,13 @@
 
 ### Data types
 
-* [`Puppet_run_scheduler::Run_interval`](#puppet_run_schedulerrun_interval)
+* [`Puppet_run_scheduler::Run_interval`](#puppet_run_schedulerrun_interval): A list of permissible run_interval settings
 
 ## Classes
 
 ### <a name="puppet_run_scheduler"></a>`puppet_run_scheduler`
 
 puppet_run_scheduler
-
-A description of what this class does
 
 #### Examples
 
@@ -211,7 +209,7 @@ Data type: `Puppet_run_scheduler::Run_interval`
 
 ### <a name="puppet_run_schedulerrun_interval"></a>`Puppet_run_scheduler::Run_interval`
 
-The Puppet_run_scheduler::Run_interval data type.
+A list of permissible run_interval settings
 
 Alias of
 

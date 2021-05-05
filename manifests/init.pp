@@ -1,8 +1,6 @@
 # puppet_run_scheduler
 #
-# A description of what this class does
-#
-# @summary A short summary of the purpose of this class
+# @summary Configure and distribute Puppet run frequency using Cron (Posix) and Scheduled Tasks (Windows).
 #
 # @example Using a default 30m run interval, you can simply include the class
 #   include puppet_run_scheduler

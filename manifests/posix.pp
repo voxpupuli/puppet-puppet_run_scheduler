@@ -1,5 +1,7 @@
 # puppet_run_scheduler::posix
 #
+# @summary Private implementation class for posix OSes
+#
 # @param [Stdlib::Absolutepath] puppet_executable
 #   The fully qualified path to the Puppet executable to run on Posix systems.
 #   All of the Puppet command-line arguments appropriate for perfoming a

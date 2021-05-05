@@ -1,3 +1,4 @@
+# A list of permissible run_interval settings
 type Puppet_run_scheduler::Run_interval = Enum[
   '15m',
   '30m',
