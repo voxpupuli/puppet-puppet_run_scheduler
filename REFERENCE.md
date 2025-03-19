@@ -7,16 +7,16 @@
 ### Classes
 
 * [`puppet_run_scheduler`](#puppet_run_scheduler): Configure and distribute Puppet run frequency using Cron (Posix) and Scheduled Tasks (Windows).
-* [`puppet_run_scheduler::posix`](#puppet_run_schedulerposix): Private implementation class for posix OSes
-* [`puppet_run_scheduler::windows`](#puppet_run_schedulerwindows): Private implementation class for Windows OS
+* [`puppet_run_scheduler::posix`](#puppet_run_scheduler--posix): Private implementation class for posix OSes
+* [`puppet_run_scheduler::windows`](#puppet_run_scheduler--windows): Private implementation class for Windows OS
 
 ### Functions
 
-* [`puppet_run_scheduler::minutes`](#puppet_run_schedulerminutes)
+* [`puppet_run_scheduler::minutes`](#puppet_run_scheduler--minutes)
 
 ### Data types
 
-* [`Puppet_run_scheduler::Run_interval`](#puppet_run_schedulerrun_interval): A list of permissible run_interval settings
+* [`Puppet_run_scheduler::Run_interval`](#Puppet_run_scheduler--Run_interval): A list of permissible run_interval settings
 
 ## Classes
 
@@ -46,14 +46,14 @@ class { 'puppet_run_scheduler':
 
 The following parameters are available in the `puppet_run_scheduler` class:
 
-* [`ensure`](#ensure)
-* [`run_interval`](#run_interval)
-* [`start_time`](#start_time)
-* [`splaylimit`](#splaylimit)
-* [`posix_puppet_executable`](#posix_puppet_executable)
-* [`windows_puppet_executable`](#windows_puppet_executable)
+* [`ensure`](#-puppet_run_scheduler--ensure)
+* [`run_interval`](#-puppet_run_scheduler--run_interval)
+* [`start_time`](#-puppet_run_scheduler--start_time)
+* [`splaylimit`](#-puppet_run_scheduler--splaylimit)
+* [`posix_puppet_executable`](#-puppet_run_scheduler--posix_puppet_executable)
+* [`windows_puppet_executable`](#-puppet_run_scheduler--windows_puppet_executable)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-puppet_run_scheduler--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -63,7 +63,7 @@ it shouldn't have been.
 
 Default value: `'present'`
 
-##### <a name="run_interval"></a>`run_interval`
+##### <a name="-puppet_run_scheduler--run_interval"></a>`run_interval`
 
 Data type: `Puppet_run_scheduler::Run_interval`
 
@@ -73,7 +73,7 @@ Valid values: 15m, 30m, 1h, 2h, 3h, 4h, 6h, 8h, 12h, 24h
 
 Default value: `'30m'`
 
-##### <a name="start_time"></a>`start_time`
+##### <a name="-puppet_run_scheduler--start_time"></a>`start_time`
 
 Data type: `Pattern[/[0-2]\d:\d\d/]`
 
@@ -86,7 +86,7 @@ minutes of a known maintenance window.
 
 Default value: `'00:00'`
 
-##### <a name="splaylimit"></a>`splaylimit`
+##### <a name="-puppet_run_scheduler--splaylimit"></a>`splaylimit`
 
 Data type: `Puppet_run_scheduler::Run_interval`
 
@@ -96,7 +96,7 @@ over. By default runs will be fully spread out over the entire
 
 Default value: `$run_interval`
 
-##### <a name="posix_puppet_executable"></a>`posix_puppet_executable`
+##### <a name="-puppet_run_scheduler--posix_puppet_executable"></a>`posix_puppet_executable`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -106,7 +106,7 @@ one-time run will be passed to this executable.
 
 Default value: `'/opt/puppetlabs/bin/puppet'`
 
-##### <a name="windows_puppet_executable"></a>`windows_puppet_executable`
+##### <a name="-puppet_run_scheduler--windows_puppet_executable"></a>`windows_puppet_executable`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -116,7 +116,7 @@ a one-time run will be passed to this executable.
 
 Default value: `'C:\\Program Files\\Puppet Labs\\Puppet\\bin\\puppet.bat'`
 
-### <a name="puppet_run_schedulerposix"></a>`puppet_run_scheduler::posix`
+### <a name="puppet_run_scheduler--posix"></a>`puppet_run_scheduler::posix`
 
 puppet_run_scheduler::posix
 
@@ -124,9 +124,9 @@ puppet_run_scheduler::posix
 
 The following parameters are available in the `puppet_run_scheduler::posix` class:
 
-* [`puppet_executable`](#puppet_executable)
+* [`puppet_executable`](#-puppet_run_scheduler--posix--puppet_executable)
 
-##### <a name="puppet_executable"></a>`puppet_executable`
+##### <a name="-puppet_run_scheduler--posix--puppet_executable"></a>`puppet_executable`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -136,7 +136,7 @@ one-time run will be passed to this executable.
 
 Default value: `$puppet_run_scheduler::posix_puppet_executable`
 
-### <a name="puppet_run_schedulerwindows"></a>`puppet_run_scheduler::windows`
+### <a name="puppet_run_scheduler--windows"></a>`puppet_run_scheduler::windows`
 
 puppet_run_scheduler::windows
 
@@ -144,12 +144,12 @@ puppet_run_scheduler::windows
 
 The following parameters are available in the `puppet_run_scheduler::windows` class:
 
-* [`scheduled_task_user`](#scheduled_task_user)
-* [`puppet_executable`](#puppet_executable)
-* [`manage_lastrun_acls`](#manage_lastrun_acls)
-* [`scheduled_task_password`](#scheduled_task_password)
+* [`scheduled_task_user`](#-puppet_run_scheduler--windows--scheduled_task_user)
+* [`puppet_executable`](#-puppet_run_scheduler--windows--puppet_executable)
+* [`manage_lastrun_acls`](#-puppet_run_scheduler--windows--manage_lastrun_acls)
+* [`scheduled_task_password`](#-puppet_run_scheduler--windows--scheduled_task_password)
 
-##### <a name="scheduled_task_user"></a>`scheduled_task_user`
+##### <a name="-puppet_run_scheduler--windows--scheduled_task_user"></a>`scheduled_task_user`
 
 Data type: `String[1]`
 
@@ -157,7 +157,7 @@ The user to run the Puppet run scheduled task as.
 
 Default value: `'system'`
 
-##### <a name="puppet_executable"></a>`puppet_executable`
+##### <a name="-puppet_run_scheduler--windows--puppet_executable"></a>`puppet_executable`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -167,27 +167,27 @@ a one-time run will be passed to this executable.
 
 Default value: `$puppet_run_scheduler::windows_puppet_executable`
 
-##### <a name="manage_lastrun_acls"></a>`manage_lastrun_acls`
+##### <a name="-puppet_run_scheduler--windows--manage_lastrun_acls"></a>`manage_lastrun_acls`
 
 Data type: `Boolean`
 
 Whether or not to manage acl entries on Puppet lastrun files, to work
 around [PUP-9238](https://tickets.puppetlabs.com/browse/PUP-9238).
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="scheduled_task_password"></a>`scheduled_task_password`
+##### <a name="-puppet_run_scheduler--windows--scheduled_task_password"></a>`scheduled_task_password`
 
 Data type: `Optional[Variant[String[1], Sensitive[String[1]]]]`
 
 The password for the user to run the Puppet run scheduled task as. Only
 used if specifying a user other than "system" via `scheduled_task_user`.
 
-Default value: ``undef``
+Default value: `undef`
 
 ## Functions
 
-### <a name="puppet_run_schedulerminutes"></a>`puppet_run_scheduler::minutes`
+### <a name="puppet_run_scheduler--minutes"></a>`puppet_run_scheduler::minutes`
 
 Type: Puppet Language
 
@@ -207,13 +207,9 @@ Data type: `Puppet_run_scheduler::Run_interval`
 
 ## Data types
 
-### <a name="puppet_run_schedulerrun_interval"></a>`Puppet_run_scheduler::Run_interval`
+### <a name="Puppet_run_scheduler--Run_interval"></a>`Puppet_run_scheduler::Run_interval`
 
 A list of permissible run_interval settings
 
-Alias of
-
-```puppet
-Enum['15m', '30m', '1h', '2h', '3h', '4h', '6h', '8h', '12h', '24h']
-```
+Alias of `Enum['15m', '30m', '1h', '2h', '3h', '4h', '6h', '8h', '12h', '24h']`
 
