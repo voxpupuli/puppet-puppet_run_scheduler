@@ -3,29 +3,24 @@
 
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
+group :test do
+  gem 'voxpupuli-test', '~> 9.0',   :require => false
+  gem 'coveralls',                  :require => false
+  gem 'simplecov-console',          :require => false
+  gem 'puppet_metadata', '~> 5.0',  :require => false
+end
+
 group :development do
-  gem 'github_changelog_generator', '~> 1.15',                                :require => false
-  gem 'puppet-lint-absolute_classname-check', '~> 3.0',                       :require => false
-  gem 'puppet-lint-absolute_template_path', '~> 1.0',                         :require => false
-  gem 'puppet-lint-anchor-check', '~> 1.0',                                   :require => false
-  gem 'puppet-lint-classes_and_types_beginning_with_digits-check', '~> 0.1',  :require => false
-  gem 'puppet-lint-empty_string-check', '~> 0.2',                             :require => false
-  gem 'puppet-lint-file_ensure-check', '~> 0.3',                              :require => false
-  gem 'puppet-lint-leading_zero-check', '~> 0.1',                             :require => false
-  gem 'puppet-lint-legacy_facts-check', '~> 1.0',                             :require => false
-  gem 'puppet-lint-manifest_whitespace-check', '~> 0.1',                      :require => false
-  gem 'puppet-lint-param-docs', '~> 1.6',                                     :require => false
-  gem 'puppet-lint-resource_reference_syntax', '~> 1.0',                      :require => false
-  gem 'puppet-lint-spaceship_operator_without_tag-check', '~> 0.1',           :require => false
-  gem 'puppet-lint-strict_indent-check', '~> 2.0',                            :require => false
-  gem 'puppet-lint-top_scope_facts-check', '~> 1.0',                          :require => false
-  gem 'puppet-lint-topscope-variable-check', '~> 1.0',                        :require => false
-  gem 'puppet-lint-trailing_comma-check', '~> 0.4',                           :require => false
-  gem 'puppet-lint-trailing_newline-check', '~> 1.1',                         :require => false
-  gem 'puppet-lint-undef_in_function-check', '~> 0.2',                        :require => false
-  gem 'puppet-lint-unquoted_string-check', '~> 2.0',                          :require => false
-  gem 'puppet-lint-variable_contains_upcase', '~> 1.2',                       :require => false
-  gem 'puppet-lint-version_comparison-check', '~> 0.2',                       :require => false
+  gem 'guard-rake',               :require => false
+  gem 'overcommit', '>= 0.39.1',  :require => false
+end
+
+group :system_tests do
+  gem 'voxpupuli-acceptance', '~> 3.5',  :require => false
+end
+
+group :release do
+  gem 'voxpupuli-release', '~> 3.0',  :require => false
 end
 
 gem 'rake', :require => false
