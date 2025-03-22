@@ -57,8 +57,9 @@ class puppet_run_scheduler (
   $splaylimit_mins = puppet_run_scheduler::minutes($splaylimit)
 
   $splay_mins = fqdn_rand($splaylimit_mins, 'puppet_run_scheduler')
-  $input_start_hour = Integer($start_time[0,2])
-  $input_start_min  = Integer($start_time[3,2])
+  $start_time_array = split($start_time, ':')
+  $input_start_hour = Integer(regsubst($start_time_array[0], '^0(\d)', '\1'))
+  $input_start_min  = Integer(regsubst($start_time_array[1], '^0(\d)', '\1'))
 
   $splayed_start_epoch_mins = $input_start_hour * 60 + $input_start_min + $splay_mins
   $first_start_epoch_mins   = $splayed_start_epoch_mins % $interval_mins
