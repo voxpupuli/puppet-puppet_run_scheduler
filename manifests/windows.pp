@@ -84,7 +84,7 @@ class puppet_run_scheduler::windows (
         inherit_parent_permissions => false,
         permissions                => [
           { 'identity' => 'NT AUTHORITY\SYSTEM', 'rights' => ['full'] },
-          { 'identity' => 'BUILTIN\Administrators', 'rights' => ['full'] },
+          { 'identity' => 'S-1-5-32-544', 'rights' => ['full'] },
         ],
       }
     }
