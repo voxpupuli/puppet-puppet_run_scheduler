@@ -66,7 +66,7 @@ class puppet_run_scheduler::windows (
   # finishing a manually invoked run correctly. Therefore, ensure during the
   # Puppet run that ACLs on these files are set correctly.
   if $manage_lastrun_acls {
-    $statedir = 'C:/ProgramData/PuppetLabs/puppet/cache/state'
+    $statedir = "${facts['extlib__puppet_config']['main']['vardir']}/state"
     $lastrun_files = {
       'puppet-lastrunfile'   => "${statedir}/last_run_summary.yaml",
       'puppet-lastrunreport' => "${statedir}/last_run_report.yaml",

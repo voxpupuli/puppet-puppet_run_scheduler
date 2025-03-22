@@ -5,3 +5,4 @@ fixtures:
     cron: https://github.com/puppetlabs/puppetlabs-cron_core
     scheduled_task: https://github.com/puppetlabs/puppetlabs-scheduled_task
     stdlib: https://github.com/puppetlabs/puppetlabs-stdlib
+    extlib: https://github.com/voxpupuli/puppet-extlib
