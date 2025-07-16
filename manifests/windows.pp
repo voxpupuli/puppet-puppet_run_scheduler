@@ -78,13 +78,17 @@ class puppet_run_scheduler::windows (
         path   => $path,
       }
 
+      # Since entity names still are localised on Windows, we need to use the
+      # unambiguous well-known SIDs [1], replacing 'BUILTIN\Administrators' with
+      # 'S-1-5-32-544' as otherwise a non-English installation will fail here.
+      # [1] https://learn.microsoft.com/en-us/windows/win32/secauthz/well-known-sids
       acl { $title:
         target                     => $path,
         purge                      => false,
         inherit_parent_permissions => false,
         permissions                => [
           { 'identity' => 'NT AUTHORITY\SYSTEM', 'rights' => ['full'] },
-          { 'identity' => 'BUILTIN\Administrators', 'rights' => ['full'] },
+          { 'identity' => 'S-1-5-32-544', 'rights' => ['full'] },
         ],
       }
     }
