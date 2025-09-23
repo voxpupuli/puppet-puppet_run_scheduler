@@ -42,8 +42,8 @@ class puppet_run_scheduler::windows (
       'schedule'         => 'daily',
       'start_time'       => sprintf('%02d:%02d', $start_hour, $start_min),
     } + ($interval_mins ? {
-        1440    => {},
-        default => { 'minutes_interval' => $interval_mins },
+      1440    => {},
+      default => { 'minutes_interval' => $interval_mins },
   })]
 
   scheduled_task { 'puppet-run-scheduler':
