@@ -17,7 +17,7 @@ describe 'puppet_run_scheduler::posix' do
                              { 'operatingsystem' => 'Ubuntu' },
                              { 'operatingsystem' => 'Fedora' },
                              { 'operatingsystem' => 'SLES' },
-                             { 'operatingsystem' => 'Solaris' }] }
+                             { 'operatingsystem' => 'Solaris' },] }
 
   on_supported_os(test_on).each do |os, os_facts|
     context "on #{os}" do
