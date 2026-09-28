@@ -27,12 +27,22 @@ class puppet_run_scheduler::posix (
     $epoch_mins % 60
   }.unique()
 
+  # cron on macOS starts jobs without LANG, and Facter then fails to read the
+  # system_profiler output (the default computer name contains a U+2019
+  # apostrophe), dropping most of the system_profiler fact. The launchd
+  # daemon this replaces sets LANG in its plist.
+  $environment = $facts['os']['family'] ? {
+    'Darwin' => ['LANG=en_US.UTF-8'],
+    default  => undef,
+  }
+
   cron { 'puppet-run-scheduler':
-    ensure  => $puppet_run_scheduler::ensure,
-    command => "${puppet_executable} agent ${puppet_run_scheduler::agent_flags} >/dev/null 2>&1",
-    user    => 'root',
-    hour    => $hours,
-    minute  => $mins,
-    before  => Service['puppet'],
+    ensure      => $puppet_run_scheduler::ensure,
+    command     => "${puppet_executable} agent ${puppet_run_scheduler::agent_flags} >/dev/null 2>&1",
+    user        => 'root',
+    hour        => $hours,
+    minute      => $mins,
+    environment => $environment,
+    before      => Service['puppet'],
   }
 }
