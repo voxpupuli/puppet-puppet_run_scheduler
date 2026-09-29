@@ -93,9 +93,11 @@
     },
     {
       "operatingsystem": "Darwin",
+      # Darwin release != macOS release, see https://en.wikipedia.org/wiki/MacOS_version_history#Overview
       "operatingsystemrelease": [
         "24",
-        "25"
+        "25",
+        "27"
       ]
     }
   ],
