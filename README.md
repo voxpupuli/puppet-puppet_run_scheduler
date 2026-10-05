@@ -27,7 +27,7 @@ The puppet service will be disabled when puppet\_run\_scheduler is implemented o
 
 On Windows, puppet\_run\_scheduler will install a Scheduled Task called "puppet-run-scheduler".
 
-On Linux/Unix, puppet\_run\_scheduler will install a puppet-run-scheduler cron job under the root user.
+On Linux/Unix, including macOS, puppet\_run\_scheduler will install a puppet-run-scheduler cron job under the root user.
 
 ## Basic Usage
 

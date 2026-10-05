@@ -17,13 +17,20 @@ describe 'puppet_run_scheduler::posix' do
                              { 'operatingsystem' => 'Ubuntu' },
                              { 'operatingsystem' => 'Fedora' },
                              { 'operatingsystem' => 'SLES' },
-                             { 'operatingsystem' => 'Solaris' },] }
+                             { 'operatingsystem' => 'Solaris' },
+                             { 'operatingsystem' => 'Darwin' },] }
 
   on_supported_os(test_on).each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
 
       it { is_expected.to compile }
+
+      if os_facts[:os]['family'] == 'Darwin'
+        it { is_expected.to contain_cron('puppet-run-scheduler').with_environment(['LANG=en_US.UTF-8']) }
+      else
+        it { is_expected.to contain_cron('puppet-run-scheduler').without_environment }
+      end
     end
   end
 end
